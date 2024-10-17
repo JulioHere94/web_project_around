@@ -1,0 +1,42 @@
+.elements__conatiner{
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 282px);
+  column-gap: 17px;
+  row-gap: 21px;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+
+.element{
+  display: grid;
+  background-color: #ffffff;
+  color: black;
+  grid-template-areas:
+  "image image"
+  "title like";
+  border-radius: 4%;
+  height: 361px;
+}
+
+
+.element_image{
+  grid-area: image;
+}
+
+
+.element_paragraph{
+  font-size: 1.5rem;
+  font-weight: 900;
+  grid-area: title;
+  align-self: center;
+  text-align: center;
+}
+
+.element_button{
+  background-color: transparent;
+  border: none;
+  grid-area: like;
+  align-self: center;
+}
