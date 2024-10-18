@@ -16,7 +16,7 @@
   grid-template-areas:
   "image image"
   "title like";
-  border-radius: 4%;
+  border-radius: 5%;
   height: 361px;
 }
 
@@ -27,11 +27,13 @@
 
 
 .element_paragraph{
+  width: 100%;
   font-size: 1.5rem;
   font-weight: 900;
   grid-area: title;
   align-self: center;
-  text-align: center;
+  text-align: left;
+  padding-left: 23px;
 }
 
 .element_button{
@@ -39,4 +41,18 @@
   border: none;
   grid-area: like;
   align-self: center;
+  text-align: end;
+  padding-right: 18px;
+}
+
+@media screen and (max-width: 920px){
+  .elements__conatiner{
+    grid-template-columns: repeat(2, 282px);
+  }
+}
+
+@media screen and (max-width: 624px){
+  .elements__conatiner{
+    grid-template-columns: repeat(1, 282px);
+  }
 }
