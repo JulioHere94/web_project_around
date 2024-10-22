@@ -17,7 +17,9 @@
   padding-right: 165px;
   grid-template-areas:
   "name button"
-  "sub-name ."
+  "sub-name .";
+  width: 100%;
+  max-width: 425px;
 
 }
 
@@ -26,6 +28,9 @@
   font-size: 2.62rem;
   line-height: 1.14;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .profile-Info_sub-title {
@@ -40,6 +45,11 @@
   height: 24px;
   background-color: transparent;
   border: 1px solid #FFFFFF;
+  cursor: pointer;
+}
+
+.profile-Info__button:hover{
+  opacity: 50%;
 }
 
 .profile__Button-Add{
@@ -49,9 +59,12 @@
   background-color: transparent;
   color: #FFFFFF;
   border: 2px solid #FFFFFF;
+  cursor: pointer;
 }
 
-
+.profile__Button-Add:hover{
+  opacity: 50%;
+}
 
 @media screen and (max-width: 920px){
   .profile{

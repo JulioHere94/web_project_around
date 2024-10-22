@@ -17,12 +17,18 @@
 
 @media screen and (max-width: 624px){
   .header{
-    width: 320px;
+    width: 300x;
     margin:20px;
     margin: 28px auto 32px;
   }
 
   .header__logo{
     width: 126px;
+    margin-left: 27px;
+  }
+
+  .header__horizontal-line{
+    width: 300px;
+    margin-top: 32px;
   }
 }
