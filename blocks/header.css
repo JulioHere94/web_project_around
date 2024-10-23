@@ -19,16 +19,17 @@
   .header{
     width: 300x;
     margin:20px;
-    margin: 28px auto 32px;
+    margin: 0;
   }
 
   .header__logo{
+    margin-top: 28px;
     width: 126px;
     margin-left: 27px;
   }
 
   .header__horizontal-line{
-    width: 300px;
-    margin-top: 32px;
+    width: 99%;
+    margin: 32px auto 42px;
   }
 }
