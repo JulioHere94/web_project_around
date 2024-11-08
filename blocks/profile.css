@@ -36,6 +36,9 @@
 .profile-Info_sub-title {
   grid-area: sub-name;
   font-size: 1.13rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .profile-Info__button{

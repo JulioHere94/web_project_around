@@ -110,3 +110,38 @@ border-bottom: solid 1px #000;
     margin: auto;
   }
 }
+
+.popup__img-button-cancel{
+  background: transparent;
+  border: none;
+  align-self: flex-end;
+  cursor: pointer;
+  grid-area: button;
+}
+
+.popup__img-button-cancel:hover {
+  opacity: 50%;
+}
+
+.input-title{
+  margin-top: 54px;
+  margin-bottom: 29.74px;
+  }
+
+  .input__link{
+    margin-bottom: 48px;
+  }
+
+  .popup__image{
+    z-index: 11;
+    max-width: 75vw;
+    max-height: 75vh;
+    border: none;
+    background-color: transparent;
+  }
+
+  .popup-image_img{
+    width: 100%;
+    height: 100%;
+  }
+

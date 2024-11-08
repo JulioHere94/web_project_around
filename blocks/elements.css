@@ -1,4 +1,4 @@
-.elements__conatiner{
+.elements__container{
   max-width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 282px);
@@ -9,20 +9,24 @@
 }
 
 
-.element{
+.element {
   display: grid;
   background-color: #ffffff;
   color: black;
   grid-template-areas:
-  "image image"
-  "title like";
+    "image image"
+    "title like";
   border-radius: 5%;
+  width: 282px;
   height: 361px;
+  position: relative;
 }
-
 
 .element_image{
   grid-area: image;
+  width: 282px;
+  height: 282px;
+  z-index: 1;
 }
 
 
@@ -64,4 +68,23 @@
   .elements__conatiner{
     grid-template-columns: repeat(1, 282px);
   }
+}
+
+.element__button-trash {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  background-color: transparent;
+  border: none;
+  z-index: 10;
+}
+
+.element_button-image-trash {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.element__button-trash:hover {
+  opacity: 60%;
 }
