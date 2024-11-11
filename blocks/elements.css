@@ -59,13 +59,13 @@
 }
 
 @media screen and (max-width: 920px){
-  .elements__conatiner{
+  .elements__container{
     grid-template-columns: repeat(2, 282px);
   }
 }
 
 @media screen and (max-width: 624px){
-  .elements__conatiner{
+  .elements__container{
     grid-template-columns: repeat(1, 282px);
   }
 }
@@ -87,4 +87,8 @@
 
 .element__button-trash:hover {
   opacity: 60%;
+}
+
+.element_image{
+  cursor: pointer;
 }

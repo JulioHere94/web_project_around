@@ -1,21 +1,23 @@
 // Definindo as variaveis//
 var editButton = document.querySelector(".profile-Info__button");
 var addButton = document.querySelector(".profile__Button-Add");
-var favDialog = document.querySelector('.popup-name'); //usado
-var favDialogImg = document.querySelector('.popup-image'); //usado
-var closeButton = document.querySelector(".popup__button-cancel"); //usado
-var closeButtonImg = document.querySelector(".popup__img-button-cancel"); //usado
+var favDialog = document.querySelector('.popup-name');
+var favDialogImg = document.querySelector('.popup-image');
+var closeButton = document.querySelector(".popup__button-cancel");
+var closeButtonImg = document.querySelector(".popup__img-button-cancel");
 let likeButton = document.querySelectorAll(".element__button");
-const nomeLi = document.querySelector('.name-result'); //usado
-const inputName = document.querySelector('.input-name'); //usado
-const subName = document.querySelector('.sub-title'); //usado
-const subNameForm = document.querySelector('.input__sub-name'); //usado
-const formElement = document.querySelector('.popup__container'); //usado
+const nomeLi = document.querySelector('.name-result');
+const inputName = document.querySelector('.input-name');
+const subName = document.querySelector('.sub-title');
+const subNameForm = document.querySelector('.input__sub-name');
+const formElement = document.querySelector('.popup__container');
 const addContainer = document.querySelector('.add__container');
 const inputTitle = document.querySelector('.input-title');
 const inputLink = document.querySelector('.input__link');
 const likedButton = document.querySelector('.like__button');
-const addButtonForm = document.querySelector('button__add')
+const addButtonForm = document.querySelector('button__add');
+const favDialogElement = document.querySelector('.popup__element');
+
 
 
 // adicionado os dados ao formulario
@@ -50,9 +52,10 @@ formElement.addEventListener('submit', function (event) {
   favDialog.close();
 })
 
+//Definindo o container
 const elementContainer = document.querySelector('.elements__container');
 
-// adicionando os cartões
+// adicionando os cartões "Default"
 const initialCards = [
   {
     name: "Vale de Yosemite",
@@ -83,7 +86,7 @@ const initialCards = [
 
 
 
-//renderizando um card
+//renderizando um card (default)
 
 function renderCards(cardsArray){
 
@@ -106,7 +109,7 @@ cardsArray.forEach(card => {
   const containerTrashImage = document.createElement('img')
   containerTrashImage.classList.add('element_button-image-trash')
   containerTrashImage.src = './images/Trash.png'
-  
+
   //função da lixeira
   containerTrash.addEventListener('click', function(){
     container.remove()
@@ -115,11 +118,12 @@ cardsArray.forEach(card => {
   const containerLike = document.createElement('button')
   containerLike.classList.add('element__button')
 
+  //função de like
   const containerLikeImage = document.createElement('img')
   containerLikeImage.classList.add('element_button-image')
   containerLikeImage.src = './images/Vector.svg'
 
-  //função do like
+  //adição do Eventi Listener ao like para mudança da imagem (substituindo o innerHTML)
   containerLike.addEventListener('click', () => {
     if(containerLikeImage.src.includes('Vector.svg')) {
       containerLikeImage.src = './images/likeAtive.png';
@@ -128,6 +132,21 @@ cardsArray.forEach(card => {
     }
   })
 
+  //Abertura do popup com a imagem 'postada'
+  containerImage.addEventListener('click', function(){
+    const imagePopup = document.querySelector('.popup__element');
+    const popupImage = document.querySelector('.popup__element_img');
+    const popupTitle = document.querySelector('.popup__element_title');
+    popupImage.src = card.link;
+    popupTitle.textContent = card.name;
+    imagePopup.showModal();
+  });
+  const closePopupButton = document.querySelector('.closePopup');
+        closePopupButton.addEventListener("click", function() {
+        document.querySelector('.popup__element').close();
+  })
+
+  //adicionando os elementos ao HTML
   containerTrash.append(containerTrashImage)
   containerLike.append(containerLikeImage)
   container.append(containerParagraph, containerImage,containerLike, containerTrash);
@@ -138,7 +157,7 @@ cardsArray.forEach(card => {
 renderCards(initialCards);
 
 
-//renderizando um card no topo
+//renderizando um card no topo (cards novos)
 
 function renderCardsAtTop(cardsArray){
 
@@ -163,6 +182,7 @@ function renderCardsAtTop(cardsArray){
 
     containerTrash.addEventListener('click', function(){
       container.remove()
+
     });
 
     const containerLike = document.createElement('button')
@@ -181,6 +201,16 @@ function renderCardsAtTop(cardsArray){
 
     })
 
+    containerImage.addEventListener('click', function(){
+      const imagePopup = document.querySelector('.popup__element');
+      const popupImage = document.querySelector('.popup__element_img');
+      const popupTitle = document.querySelector('.popup__element_title');
+      popupImage.src = card.link;
+      popupTitle.textContent = card.name;
+      imagePopup.showModal();
+
+    });
+
     containerTrash.append(containerTrashImage)
     containerLike.append(containerLikeImage)
     container.prepend(containerTrash, containerParagraph, containerImage,containerLike);
@@ -189,9 +219,8 @@ function renderCardsAtTop(cardsArray){
   }
 
   //adicionando um item ao array
-
-addContainer.addEventListener('submit', function(event) {
-  event.preventDefault();
+  addContainer.addEventListener('submit', function(event) {
+  event.preventDefault(); //pelas minhas pesquisas o preventDefault evita o refresh da pagina
 
   const newElement = {
     name: inputTitle.value,
@@ -199,7 +228,7 @@ addContainer.addEventListener('submit', function(event) {
   };
 
 initialCards.unshift(newElement);
-renderCardsAtTop([newElement]);
+renderCardsAtTop([newElement]); //chamo a função para renderizar o novo cartão no topo
 
 inputTitle.value='';
 inputLink.value='';
@@ -208,5 +237,7 @@ inputLink.value='';
 favDialogImg.close();
 
 });
+
+
 
 

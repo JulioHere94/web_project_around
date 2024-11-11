@@ -91,6 +91,7 @@ border-bottom: solid 1px #000;
       width: 232px;
       height: 26px;
   }
+
   .container__button{
     width: 232px;
     height: 46px;
@@ -108,6 +109,19 @@ border-bottom: solid 1px #000;
 
   .popup{
     margin: auto;
+  }
+
+  .popup__element_img{
+    max-width: 75vw;
+    max-height: 75vh;
+  }
+
+  .popup__img-button-cancel{
+    width: 30px;
+  }
+
+  .popup__button-cancel-image{
+    width: 26px;
   }
 }
 
@@ -132,16 +146,40 @@ border-bottom: solid 1px #000;
     margin-bottom: 48px;
   }
 
-  .popup__image{
+  .popup__element{
     z-index: 11;
-    max-width: 75vw;
-    max-height: 75vh;
     border: none;
     background-color: transparent;
   }
 
-  .popup-image_img{
-    width: 100%;
-    height: 100%;
+  .popup__element::backdrop{
+    background-color: rgba(0,0,0,0.6);
+  }
+
+  .popup__element_img{
+    max-width: 75vw;
+    max-height: 75vh;
+    border: none;
+  }
+
+  .popup__element_title{
+    color: white;
+    font-size: 12px;
+    line-height: 1.21;
+    font-weight: 400;
+    font-family: "Inter";
+  }
+
+  .popup_element-rectangle{
+    display: grid;
+    padding: 0;
+    background-color: transparent;
+    grid-template-areas:
+    ". button"
+    "form .";
+  }
+
+  .popup__container-element{
+    grid-area: form;
   }
 
