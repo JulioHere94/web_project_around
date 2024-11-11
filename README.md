@@ -5,11 +5,14 @@ Neste projeto simularemos um "web-app" similiar a uma rede social de fotos.
 <li>O "Web App" deverá ser resposivo para alguns tamanhos de tela</li>
 <li>Possuis botões para alteração do nome e ocupação (ambos contendo a linguagem JS)</li>
 <li>Botões interativos para "like/curtir" uma foto</li>
+<li>Adicionado as funçoes ao botão "+" (para adição de novas fotos via link)</li>
+<li>Adição do botão de excluir publicação</li>
+<li>Adição de Pop-Up para visualização da foto em tamanho real (75vw e 75vh)</li>
 
 **<br><big>Melhorias:</big>**
-<li>Adição de função ao botão +</li>
+<li>Criação do Back-End</li>
 <li>Adição de contadores de like.</li>
-<li>Adição de botão excluir</li>
+
 
 **<br>Principais Linguagens utilizadas**:
 <br>
