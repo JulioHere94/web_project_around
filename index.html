@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +24,7 @@
         <button class="profile-Info__button" id="edit">
           <img src="./images/button-edit.png" alt="botão editar" class="profile-Info__button-image">
         </button>
-        <dialog class="popup">
+        <dialog class="popup popup-name">
           <div class="popup_rectangle">
             <button class="popup__button-cancel">
               <img src="./images/Close Icon.png" class="popup__button-cancel-image">
@@ -41,57 +41,45 @@
       <button type="button" class="profile__Button-Add">
         <img src="./images/Vector_button_big.png" alt="Botão adicionar" class="Profile__Button-Add-image">
       </button>
-    </section>
-    <section class="elements__conatiner">
-      <div class="element">
-        <img src="./images/Vale de Yosemite.jpg" alt="Paisagem Vale de Yosemite" class="element_image">
-        <p class="element_paragraph">Vale de Yosemite</p>
-        <button type="button" class="element__button">
-          <img src="./images/Vector.svg" alt="icone de curtida" class="element_button-image">
-        </button>
-      </div>
-      <div class="element">
-        <img src="./images/Lago Louise.png" alt="Paisagem do Lago Louise" class="element_image">
-        <p class="element_paragraph">Lago Louise</p>
-        <button type="button" class="element__button">
-          <img src="./images/Vector.svg" alt="icone de curtida" class="element_button-image">
-        </button>
-        </div>
-        <div class="element">
-          <img src="./images/Montanhas Care.png" alt="Paisagem Montanhas" class="element_image">
-          <p class="element_paragraph">Montanhas Care...</p>
-          <button type="button" class="element__button">
-            <img src="./images/Vector.svg" alt="icone de curtida" class="element_button-image">
+      <dialog class="popup popup-image">
+        <div class="popup_rectangle">
+          <button class="popup__img-button-cancel">
+            <img src="./images/Close Icon.png" class="popup__button-cancel-image">
           </button>
-          </div>
-          <div class="element">
-            <img src="./images/Latemar.png" alt="Paisagem de Latemar" class="element_image">
-            <p class="element_paragraph">Latemar</p>
-            <button type="button" class="element__button">
-              <img src="./images/Vector.svg" alt="icone de curtida" class="element_button-image">
-            </button>
-            </div>
-          <div class="element">
-            <img src="./images/Parque Nacional.png" alt="Paisagem de Parque nacional" class="element_image">
-            <p class="element_paragraph">Parque Nacional...</p>
-            <button type="button" class="element__button">
-              <img src="./images/Vector.svg" alt="icone de curtida" class="element_button-image">
-            </button>
-            </div>
-          <div class="element">
-            <img src="./images/Lago di Brales.png" alt="paisadem de Kirill" class="element_image">
-            <p class="element_paragraph">Lago di Braies</p>
-            <button type="button" class="element__button">
-              <img src="./images/Vector.svg" alt="icone de curtida" class="element_button-image">
-            </button>
-            </div>
-      </div>
+          <form class="popup__container add__container">
+            <h1 class="container__title">Novo local</h1>
+            <input class="container__imput input-title" placeholder="Titulo">
+            <input class="container__imput input__link" placeholder="Link da imagem">
+            <button type="submit" class="container__button button__add">Criar</button>
+          </form>
+        </div>
+      </dialog>
+          </form>
+          <dialog class="popup__element">
+        <div class="popup_element-rectangle">
+          <button class="popup__img-button-cancel closePopup">
+            <img src="./images/Close Icon.png" class="popup__button-cancel-image">
+          </button>
+          <form class="popup__container-element">
+            <img class="popup__element_img" src="">
+            <p class="popup__element_title"></p>
+          </form>
+        </div>
+      </dialog>
+    </section>
+    <section class="elements__container">
     </section>
     <footer class="footer">
-      <p class="footer__text">© 2024 Around The U.S.</p>
+      <p class="footer__text">&copy 2024 Around The U.S.</p>
     </footer>
   </main>
 </div>
+<template id="card-template">
+    <button type="button" class="element__button">
+      <img class="element_button-image">
+    </button>
+    </div>
+</template>
 <script src="./script.js"></script>
 </body>
 </html>

@@ -91,6 +91,7 @@ border-bottom: solid 1px #000;
       width: 232px;
       height: 26px;
   }
+
   .container__button{
     width: 232px;
     height: 46px;
@@ -109,4 +110,76 @@ border-bottom: solid 1px #000;
   .popup{
     margin: auto;
   }
+
+  .popup__element_img{
+    max-width: 75vw;
+    max-height: 75vh;
+  }
+
+  .popup__img-button-cancel{
+    width: 30px;
+  }
+
+  .popup__button-cancel-image{
+    width: 26px;
+  }
 }
+
+.popup__img-button-cancel{
+  background: transparent;
+  border: none;
+  align-self: flex-end;
+  cursor: pointer;
+  grid-area: button;
+}
+
+.popup__img-button-cancel:hover {
+  opacity: 50%;
+}
+
+.input-title{
+  margin-top: 54px;
+  margin-bottom: 29.74px;
+  }
+
+  .input__link{
+    margin-bottom: 48px;
+  }
+
+  .popup__element{
+    z-index: 11;
+    border: none;
+    background-color: transparent;
+  }
+
+  .popup__element::backdrop{
+    background-color: rgba(0,0,0,0.6);
+  }
+
+  .popup__element_img{
+    max-width: 75vw;
+    max-height: 75vh;
+    border: none;
+  }
+
+  .popup__element_title{
+    color: white;
+    font-size: 12px;
+    line-height: 1.21;
+    font-weight: 400;
+    font-family: "Inter";
+  }
+
+  .popup_element-rectangle{
+    display: grid;
+    padding: 0;
+    background-color: transparent;
+    grid-template-areas:
+    ". button"
+    "form .";
+  }
+
+  .popup__container-element{
+    grid-area: form;
+  }
+
