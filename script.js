@@ -102,6 +102,7 @@ cardsArray.forEach(card => {
   const containerImage = document.createElement('img');
   containerImage.classList.add('element_image');
   containerImage.src = card.link;
+  containerImage.alt = card.name;
 
   const containerTrash = document.createElement('button')
   containerTrash.classList.add('element__button-trash')
@@ -172,6 +173,7 @@ function renderCardsAtTop(cardsArray){
     const containerImage = document.createElement('img');
     containerImage.classList.add('element_image');
     containerImage.src = card.link;
+    containerImage.alt = card.name;
 
     const containerTrash = document.createElement('button')
     containerTrash.classList.add('element__button-trash')
