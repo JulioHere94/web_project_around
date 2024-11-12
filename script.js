@@ -1,11 +1,11 @@
-// Definindo as variaveis//
-var editButton = document.querySelector(".profile-Info__button");
-var addButton = document.querySelector(".profile__Button-Add");
-var favDialog = document.querySelector('.popup-name');
-var favDialogImg = document.querySelector('.popup-image');
-var closeButton = document.querySelector(".popup__button-cancel");
-var closeButtonImg = document.querySelector(".popup__img-button-cancel");
-let likeButton = document.querySelectorAll(".element__button");
+// Definindo as constiaveis//
+const editButton = document.querySelector(".profile-Info__button");
+const addButton = document.querySelector(".profile__Button-Add");
+const favDialog = document.querySelector('.popup-name');
+const favDialogImg = document.querySelector('.popup-image');
+const closeButton = document.querySelector(".popup__button-cancel");
+const closeButtonImg = document.querySelector(".popup__img-button-cancel");
+const likeButton = document.querySelectorAll(".element__button");
 const nomeLi = document.querySelector('.name-result');
 const inputName = document.querySelector('.input-name');
 const subName = document.querySelector('.sub-title');
@@ -83,33 +83,40 @@ const initialCards = [
   }
 ];
 
+function setTextContent(element, text) {
+  element.textContent = text;
+}
 
+function setSrc(element, src) {
+  element.src = src;
+}
+
+function setAlt(element, alt) {
+  element.alt = alt;
+}
 
 
 //renderizando um card (default)
 
-function renderCards(cardsArray){
-
-cardsArray.forEach(card => {
-  //Criação dos elementos
+function createCardElement(card){
   const container = document.createElement('div');
   container.classList.add('element');
 
   const containerParagraph = document.createElement('p');
   containerParagraph.classList.add('element_paragraph');
-  containerParagraph.textContent = card.name;
+  setTextContent(containerParagraph, card.name);
 
   const containerImage = document.createElement('img');
   containerImage.classList.add('element_image');
-  containerImage.src = card.link;
-  containerImage.alt = card.name;
+  setSrc(containerImage, card.link);
+  setAlt(containerImage, card.name);
 
   const containerTrash = document.createElement('button')
   containerTrash.classList.add('element__button-trash')
 
   const containerTrashImage = document.createElement('img')
   containerTrashImage.classList.add('element_button-image-trash')
-  containerTrashImage.src = './images/Trash.png'
+  setSrc(containerTrashImage, './images/Trash.png')
 
   //função da lixeira
   containerTrash.addEventListener('click', function(){
@@ -122,14 +129,14 @@ cardsArray.forEach(card => {
   //função de like
   const containerLikeImage = document.createElement('img')
   containerLikeImage.classList.add('element_button-image')
-  containerLikeImage.src = './images/Vector.svg'
+  setSrc(containerLikeImage, './images/Vector.svg')
 
   //adição do Eventi Listener ao like para mudança da imagem (substituindo o innerHTML)
   containerLike.addEventListener('click', () => {
     if(containerLikeImage.src.includes('Vector.svg')) {
       containerLikeImage.src = './images/likeAtive.png';
     } else {
-      containerLikeImage.src = './images/Vector.svg';
+      setSrc(containerLikeImage, './images/Vector.svg');
     }
   })
 
@@ -138,8 +145,9 @@ cardsArray.forEach(card => {
     const imagePopup = document.querySelector('.popup__element');
     const popupImage = document.querySelector('.popup__element_img');
     const popupTitle = document.querySelector('.popup__element_title');
-    popupImage.src = card.link;
-    popupTitle.textContent = card.name;
+    setSrc(popupImage, card.link);
+    setTextContent(popupTitle, card.name);
+    setAlt(popupImage, card.name); //adicionado o alt do pop up
     imagePopup.showModal();
   });
   const closePopupButton = document.querySelector('.closePopup');
@@ -151,76 +159,22 @@ cardsArray.forEach(card => {
   containerTrash.append(containerTrashImage)
   containerLike.append(containerLikeImage)
   container.append(containerParagraph, containerImage,containerLike, containerTrash);
-  elementContainer.append(container);
-});
+
+  return container;
 }
 
-renderCards(initialCards);
-
-
-//renderizando um card no topo (cards novos)
-
-function renderCardsAtTop(cardsArray){
-
-  cardsArray.forEach(card => {
-    const container = document.createElement('div');
-    container.classList.add('element');
-
-    const containerParagraph = document.createElement('p');
-    containerParagraph.classList.add('element_paragraph');
-    containerParagraph.textContent = card.name;
-
-    const containerImage = document.createElement('img');
-    containerImage.classList.add('element_image');
-    containerImage.src = card.link;
-    containerImage.alt = card.name;
-
-    const containerTrash = document.createElement('button')
-    containerTrash.classList.add('element__button-trash')
-
-    const containerTrashImage = document.createElement('img')
-    containerTrashImage.classList.add('element_button-image-trash')
-    containerTrashImage.src = './images/Trash.png'
-
-    containerTrash.addEventListener('click', function(){
-      container.remove()
-
-    });
-
-    const containerLike = document.createElement('button')
-    containerLike.classList.add('element__button')
-
-    const containerLikeImage = document.createElement('img')
-    containerLikeImage.classList.add('element_button-image')
-    containerLikeImage.src = './images/Vector.svg'
-
-    containerLike.addEventListener('click', () => {
-      if(containerLikeImage.src.includes('Vector.svg')) {
-        containerLikeImage.src = './images/likeAtive.png';
-      } else {
-        containerLikeImage.src = './images/Vector.svg';
-      }
-
-    })
-
-    containerImage.addEventListener('click', function(){
-      const imagePopup = document.querySelector('.popup__element');
-      const popupImage = document.querySelector('.popup__element_img');
-      const popupTitle = document.querySelector('.popup__element_title');
-      popupImage.src = card.link;
-      popupTitle.textContent = card.name;
-      imagePopup.showModal();
-
-    });
-
-    containerTrash.append(containerTrashImage)
-    containerLike.append(containerLikeImage)
-    container.prepend(containerTrash, containerParagraph, containerImage,containerLike);
-    elementContainer.prepend(container);
+//renderizo os cards iniciais na posição original
+function renderInitialCards(){
+  initialCards.forEach((card) => {
+    const cardElement = createCardElement(card);
+    elementContainer.append(cardElement);
   });
-  }
+}
 
-  //adicionando um item ao array
+//utilizo a função
+renderInitialCards();
+
+//adicionando um item ao array
   addContainer.addEventListener('submit', function(event) {
   event.preventDefault(); //pelas minhas pesquisas o preventDefault evita o refresh da pagina
 
@@ -230,7 +184,9 @@ function renderCardsAtTop(cardsArray){
   };
 
 initialCards.unshift(newElement);
-renderCardsAtTop([newElement]); //chamo a função para renderizar o novo cartão no topo
+
+const newCardElement = createCardElement(newElement);
+elementContainer.prepend(newCardElement); //utilizando o prepend para renderizar na primeira posicao
 
 inputTitle.value='';
 inputLink.value='';
