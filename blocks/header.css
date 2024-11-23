@@ -33,3 +33,7 @@
     margin: 32px auto 42px;
   }
 }
+
+.form__input_type_error {
+  border-bottom-color: red;
+}

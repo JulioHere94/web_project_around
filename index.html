@@ -29,11 +29,33 @@
             <button class="popup__button-cancel">
               <img src="./images/Close Icon.png" class="popup__button-cancel-image">
             </button>
-            <form class="popup__container">
+            <form class="popup__container form" novalidate>
               <h1 class="container__title">Editar Perfil</h1>
-              <input class="container__imput input-name" placeholder="Nome">
-              <input class="container__imput input__sub-name" placeholder="Sobre mim">
-              <button type="submit" class="container__button">Salvar</button>
+              <!-- Campo para nome -->
+              <label for="input__title" class="form__field">
+              <input
+              id="input__name"
+              class="container__imput input-name form__input"
+              placeholder="Nome"
+              required
+              type="text"
+              minlength="2"
+              maxlength="40">
+              <span id="input__name-error" class="form__input-error"></span>
+            </label>
+            <!-- Campo para descrição -->
+            <label for="input__sub-name" class="form__field">
+              <input
+              id="input__sub-name"
+              class="container__imput input__sub-name form__input"
+              placeholder="Sobre mim"
+              required
+              type="text"
+              minlength="2"
+              maxlength="40">
+              <span id="input__sub-name-error" class="form__input-error"></span>
+              </label>
+              <button type="submit" class="container__button button__add">Salvar</button>
             </form>
           </div>
         </dialog>
@@ -46,10 +68,33 @@
           <button class="popup__img-button-cancel">
             <img src="./images/Close Icon.png" class="popup__button-cancel-image">
           </button>
-          <form class="popup__container add__container">
+          <form class="popup__container add__container form" novalidate>
             <h1 class="container__title">Novo local</h1>
-            <input class="container__imput input-title" placeholder="Titulo">
-            <input class="container__imput input__link" placeholder="Link da imagem">
+              <!-- Campo para Título -->
+              <label for="input__title" class="form__field">
+                <input
+                  id="input__title"
+                  class="container__imput input-title form__input"
+                  type="text"
+                  minlength="2"
+                  maxlength="40"
+                  required
+                  placeholder="Título">
+                <span id="input__title-error" class="form__input-error"></span>
+              </label>
+
+              <!-- Campo para Link -->
+              <label for="input__link" class="form__field">
+                <input
+                  id="input__link"
+                  class="container__imput input__link form__input"
+                  placeholder="Link da imagem"
+                  type="url"
+                  minlength="2"
+                  maxlength="200"
+                  required>
+                <span id="input__link-error" class="form__input-error"></span>
+              </label>
             <button type="submit" class="container__button button__add">Criar</button>
           </form>
         </div>

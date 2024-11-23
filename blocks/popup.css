@@ -125,6 +125,23 @@ border-bottom: solid 1px #000;
   }
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparente */
+  display: none; /* Inicialmente invisível */
+  z-index: 999; /* Fica atrás do pop-up */
+}
+
+.popup__element{
+  z-index: 11;
+  border: none;
+  background-color: transparent;
+}
+
 .popup__img-button-cancel{
   background: transparent;
   border: none;
@@ -144,12 +161,6 @@ border-bottom: solid 1px #000;
 
   .input__link{
     margin-bottom: 48px;
-  }
-
-  .popup__element{
-    z-index: 11;
-    border: none;
-    background-color: transparent;
   }
 
   .popup__element::backdrop{
@@ -182,4 +193,36 @@ border-bottom: solid 1px #000;
   .popup__container-element{
     grid-area: form;
   }
+
+  .form__field{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 31.34px;
+  }
+
+  .form__input{
+    margin-bottom: 0px;
+  }
+
+  .form__input-error{
+    font-family: "Inter";
+    font-size: 12px;
+    line-height: 1.21;
+    color: #FF0000;
+    margin-top: 5px;
+  }
+
+  .form__input_type_error {
+    border-bottom: 1px solid red;
+    transition: border-color 0.3s ease; /* Faz a borda mudar suavemente */
+  }
+
+  .form__button_disabled {
+    background-color: white;
+    color: gray;
+    border: 1px solid gray;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
 

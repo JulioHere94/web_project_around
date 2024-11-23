@@ -1,11 +1,10 @@
-// Definindo as constiaveis//
+// Definindo as constantes
 const editButton = document.querySelector(".profile-Info__button");
 const addButton = document.querySelector(".profile__Button-Add");
 const favDialog = document.querySelector('.popup-name');
 const favDialogImg = document.querySelector('.popup-image');
 const closeButton = document.querySelector(".popup__button-cancel");
 const closeButtonImg = document.querySelector(".popup__img-button-cancel");
-const likeButton = document.querySelectorAll(".element__button");
 const nomeLi = document.querySelector('.name-result');
 const inputName = document.querySelector('.input-name');
 const subName = document.querySelector('.sub-title');
@@ -14,43 +13,60 @@ const formElement = document.querySelector('.popup__container');
 const addContainer = document.querySelector('.add__container');
 const inputTitle = document.querySelector('.input-title');
 const inputLink = document.querySelector('.input__link');
-const likedButton = document.querySelector('.like__button');
-const addButtonForm = document.querySelector('button__add');
-const favDialogElement = document.querySelector('.popup__element');
-
-
 
 // adicionado os dados ao formulario
 inputName.value = nomeLi.textContent;
 subNameForm.value = subName.textContent;
 
-// chamando o modal <dialog>
+// Abrindo os modais
 editButton.addEventListener("click", function () {
   favDialog.showModal();
-})
+});
 
 addButton.addEventListener("click", function () {
   favDialogImg.showModal();
-})
+});
 
-
-// chamando o 'close1 modal <dialog>
-closeButton.addEventListener("click", function() {
+// Fechando os modais com os botões de fechar
+closeButton.addEventListener("click", function () {
   favDialog.close();
-})
+});
 
-closeButtonImg.addEventListener("click", function() {
+closeButtonImg.addEventListener("click", function () {
   favDialogImg.close();
-})
+});
 
-// Função para o 'submit' do Formulario
+// Fechar `favDialog` ao clicar fora do conteúdo
+favDialog.addEventListener("click", function (event) {
+  if (event.target === favDialog) {
+    favDialog.close();
+  }
+});
+
+// Fechar `favDialogImg` ao clicar fora do conteúdo
+favDialogImg.addEventListener("click", function (event) {
+  if (event.target === favDialogImg) {
+    favDialogImg.close();
+  }
+});
+
+// Impedindo o fechamento ao clicar no formulário de `favDialog`
+document.querySelector(".popup__container").addEventListener("click", function (event) {
+  event.stopPropagation();
+});
+
+// Impedindo o fechamento ao clicar no formulário de `favDialogImg`
+document.querySelector(".add__container").addEventListener("click", function (event) {
+  event.stopPropagation();
+});
+
+// Função para o 'submit' do Formulário
 formElement.addEventListener('submit', function (event) {
   event.preventDefault();
   nomeLi.textContent = inputName.value;
   subName.textContent = subNameForm.value;
-
   favDialog.close();
-})
+});
 
 //Definindo o container
 const elementContainer = document.querySelector('.elements__container');
@@ -153,7 +169,23 @@ function createCardElement(card){
   const closePopupButton = document.querySelector('.closePopup');
         closePopupButton.addEventListener("click", function() {
         document.querySelector('.popup__element').close();
-  })
+  });
+
+  // Fechar o pop-up ao clicar no fundo (no próprio dialog)
+  const popupElement = document.querySelector('.popup__element'); //seleciona o elemento pop_UP
+  popupElement.addEventListener('click', function(event) { //captuta o evento ao click
+  // Verificar se o clique foi fora do conteúdo
+  const contentArea = document.querySelector('.popup_element-rectangle');
+  if (!contentArea.contains(event.target)) {
+    popupElement.close(); // Fecha o pop-up
+  }
+});
+
+// Impedir o fechamento do pop-up ao clicar dentro da área do conteúdo (no formulário)
+const contentArea = document.querySelector('.popup_element-rectangle');
+contentArea.addEventListener('click', function(event) {
+  event.stopPropagation(); // Impede que o clique dentro do conteúdo feche o pop-up
+});
 
   //adicionando os elementos ao HTML
   containerTrash.append(containerTrashImage)
@@ -195,6 +227,75 @@ inputLink.value='';
 favDialogImg.close();
 
 });
+
+//validação do formulário
+
+// Selecionando todos os formulários na página
+const forms = document.querySelectorAll('.form');
+
+// Função para exibir erro
+const showInputError = (input, errorMessage) => {
+  const errorElement = document.querySelector(`#${input.id}-error`);
+  input.classList.add('form__input_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('form__input-error_active');
+};
+
+// Função para ocultar erro
+const hideInputError = (input) => {
+  const errorElement = document.querySelector(`#${input.id}-error`);
+  input.classList.remove('form__input_type_error');
+  errorElement.textContent = '';
+  errorElement.classList.remove('form__input-error_active');
+};
+
+// Função de validação para um campo específico
+const isValid = (input) => {
+  if (!input.validity.valid) {
+    showInputError(input, input.validationMessage);
+  } else {
+    hideInputError(input);
+  }
+};
+
+// Adicionando a lógica de validação para cada formulário
+forms.forEach((form) => {
+  const inputs = form.querySelectorAll('.form__input');
+  const submitButton = form.querySelector('button[type="submit"]');
+
+  // Função para atualizar o estado do botão
+  const updateButtonState = () => {
+    // Verifica se todos os inputs são válidos
+    const isFormValid = Array.from(inputs).every(input => input.validity.valid);
+
+    // Habilita ou desabilita o botão de envio com base na validade
+    if (isFormValid) {
+      submitButton.classList.remove('form__button_disabled');
+      submitButton.disabled = false;
+    } else {
+      submitButton.classList.add('form__button_disabled');
+      submitButton.disabled = true;
+    }
+  };
+
+  // Adiciona eventos de input para validação e atualização do estado do botão
+  inputs.forEach((input) => {
+    input.addEventListener('input', () => {
+      isValid(input);  // Valida o campo específico
+      updateButtonState();  // Atualiza o estado do botão
+    });
+  });
+
+  // Configura o estado inicial do botão
+  updateButtonState(); // Verifica se o botão deve ser habilitado ao carregar a página
+
+  // Validação no envio do formulário
+  form.addEventListener('submit', (event) => {
+    event.preventDefault(); // Impede o envio padrão
+    inputs.forEach(isValid); // Valida todos os campos antes de enviar
+  });
+});
+
 
 
 
