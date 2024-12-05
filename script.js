@@ -14,9 +14,7 @@ const addContainer = document.querySelector('.add__container');
 const inputTitle = document.querySelector('.input-title');
 const inputLink = document.querySelector('.input__link');
 
-// adicionado os dados ao formulario
-inputName.value = nomeLi.textContent;
-subNameForm.value = subName.textContent;
+
 
 // Abrindo os modais
 editButton.addEventListener("click", function () {
