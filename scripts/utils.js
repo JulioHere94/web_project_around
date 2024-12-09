@@ -49,7 +49,7 @@ document.querySelector(".add__container").addEventListener("click", function (ev
 });
 
 // Função para o 'submit' do Formulário
-const formElement = document.querySelector('.popup__container');
+const formElement = document.querySelector('.popup__container-form');
 formElement.addEventListener('submit', function (event) {
   event.preventDefault();
   nomeLi.textContent = inputName.value;

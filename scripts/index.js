@@ -1,6 +1,6 @@
 // index.js
-import { Card } from './card.js'; // Importando a classe Card
-import { FormValidator } from './FormValidator.js';
+import { Card } from '../scripts/card.js'; // Importando a classe Card
+import { FormValidator } from '../scripts/FormValidator.js';
 
 // Seletor do container onde os cartões serão inseridos
 const elementContainer = document.querySelector('.elements__container');
