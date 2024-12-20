@@ -1,4 +1,4 @@
-import { PopupWithImage } from '../scripts/PopupWithImage.js'; // Importando PopupWithImage
+import { PopupWithImage } from './PopupWithImage.js'; // Importando PopupWithImage
 
 export class Card {
   constructor(name, link, templateSelector) {
