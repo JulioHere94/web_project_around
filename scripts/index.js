@@ -1,95 +1,83 @@
-// index.js
-import { Card } from '../scripts/card.js'; // Importando a classe Card
+import { Card } from '../scripts/Card.js';
 import { FormValidator } from '../scripts/FormValidator.js';
+import { Section } from '../scripts/Section.js';
+import { PopupWithImage } from '../scripts/PopupWithImage.js';
+import { PopupWithForm } from '../scripts/PopupWithForm.js';
+import { UserInfo } from '../scripts/UserInfo.js';
 
-// Seletor do container onde os cartões serão inseridos
-const elementContainer = document.querySelector('.elements__container');
-
-// Array com dados dos cartões
 const initialCards = [
-  {
-    name: "Vale de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg"
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg"
-  },
-  {
-    name: "Montanhas Carecas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg"
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg"
-  },
-  {
-    name: "Parque Nacional da Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg"
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg"
-  }
+  { name: "Vale de Yosemite", link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg" },
+  { name: "Lago Louise", link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg" },
+  { name: "Montanhas Carecas", link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg" },
+  { name: "Latemar", link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg" },
+  { name: "Parque Nacional da Vanoise", link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg" },
+  { name: "Lago di Braies", link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg" }
 ];
 
-// Função para renderizar os cartões
-function renderInitialCards() {
-  initialCards.forEach((cardData) => {
-    const card = new Card(cardData.name, cardData.link, '.card-template');
-    elementContainer.append(card.getCardElement());
+const imagePopup = new PopupWithImage('.popup-image');
+imagePopup.setEventListeners();
+
+const renderCard = (data) => {
+  const card = new Card(data.name, data.link, '.card-template', imagePopup.open.bind(imagePopup)); // Passando handleCardClick
+  return card.getCardElement();
+};
+
+const cardSection = new Section({
+  items: initialCards,
+  renderer: renderCard
+}, '.elements__container');
+
+cardSection.renderItems();
+
+const addPopup = new PopupWithForm({
+  popupSelector: '.popup-image',
+  handleFormSubmit: (formData) => {
+    const newCardElement = renderCard({
+      name: formData['input__title'],
+      link: formData['input__link']
+    });
+    cardSection.addItem(newCardElement);
+    addPopup.close();
+  }
+});
+addPopup.setEventListeners();
+
+const userInfo = new UserInfo({
+  nameSelector: '.name-result',
+  jobSelector: '.sub-title'
+});
+
+const editPopup = new PopupWithForm({
+  popupSelector: '.popup-name',
+  handleFormSubmit: (formData) => {
+    userInfo.setUserInfo({
+      name: formData['input__name'],
+      job: formData['input__sub-name']
+    });
+    editPopup.close();
+  }
+});
+editPopup.setEventListeners();
+
+const addButton = document.querySelector('.profile__Button-Add');
+const editButton = document.querySelector('.profile-Info__button');
+
+if (addButton) {
+  addButton.addEventListener('click', () => {
+    addPopup.open();
   });
 }
 
-// Inicializando a renderização dos cartões iniciais
-renderInitialCards();
+if (editButton) {
+  editButton.addEventListener('click', () => {
+    const userData = userInfo.getUserInfo();
+    document.querySelector('[name="input__name"]').value = userData.name;
+    document.querySelector('[name="input__sub-name"]').value = userData.job;
+    editPopup.open();
+  });
+}
 
-// Função para adicionar novos cartões ao array e renderizá-los
-const addContainer = document.querySelector('.add__container');
-
-addContainer.addEventListener('submit', function (event) {
-  event.preventDefault(); // Evita o refresh da página
-
-  const newElement = {
-    name: document.querySelector('.input-title').value,
-    link: document.querySelector('.input__link').value
-  };
-
-  // Adicionando o novo cartão à lista
-  initialCards.unshift(newElement);
-
-  // Criando e inserindo o novo cartão no início da lista
-  const newCard = new Card(newElement.name, newElement.link, '.card-template');
-  elementContainer.prepend(newCard.getCardElement());
-
-  // Limpando os campos de entrada
-  document.querySelector('.input-title').value = '';
-  document.querySelector('.input__link').value = '';
-
-  // Fechando o popup de adicionar
-  document.querySelector('.popup-image').close();
-});
-
-// Criando uma instância da classe FormValidator e ativando a validação
 const formValidator = new FormValidator('.form');
 formValidator.enableValidation();
 
-
-const nomeLi = document.querySelector('.name-result');
-const inputName = document.querySelector('.input-name');
-const subName = document.querySelector('.sub-title');
-const subNameForm = document.querySelector('.input__sub-name');
-const formElement = document.querySelector('.popup__container');
-
-// adicionado os dados ao formulario
-inputName.value = nomeLi.textContent;
-subNameForm.value = subName.textContent;
-
-// Função para o 'submit' do Formulário
-formElement.addEventListener('submit', function (event) {
-  event.preventDefault();
-  nomeLi.textContent = inputName.value;
-  subName.textContent = subNameForm.value;
-  favDialog.close();
-});
 

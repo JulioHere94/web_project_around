@@ -39,7 +39,8 @@
                     required
                     type="text"
                     minlength="2"
-                    maxlength="40">
+                    maxlength="40"
+                    name="input__name">
                   <span id="input__name-error" class="form__input-error"></span>
                 </label>
                 <label for="input__sub-name" class="form__field">
@@ -50,7 +51,8 @@
                     required
                     type="text"
                     minlength="2"
-                    maxlength="40">
+                    maxlength="40"
+                    name="input__sub-name">
                   <span id="input__sub-name-error" class="form__input-error"></span>
                 </label>
                 <button type="submit" class="container__button button__add">Salvar</button>
@@ -61,7 +63,7 @@
         <button type="button" class="profile__Button-Add">
           <img src="./images/Vector_button_big.png" alt="Botão adicionar" class="Profile__Button-Add-image">
         </button>
-        <dialog class="popup popup-image">
+        <dialog class="popup popup-image ">
           <div class="popup_rectangle">
             <button class="popup__img-button-cancel">
               <img src="./images/Close Icon.png" class="popup__button-cancel-image">
@@ -76,7 +78,8 @@
                   minlength="2"
                   maxlength="40"
                   required
-                  placeholder="Título">
+                  placeholder="Título"
+                  name="input__title">
                 <span id="input__title-error" class="form__input-error"></span>
               </label>
               <label for="input__link" class="form__field">
@@ -87,7 +90,8 @@
                   type="url"
                   minlength="2"
                   maxlength="200"
-                  required>
+                  required
+                  name="input__link">
                 <span id="input__link-error" class="form__input-error"></span>
               </label>
               <button type="submit" class="container__button button__add">Criar</button>
@@ -126,7 +130,6 @@
     </div>
   </template>
   <script type="module" src="./scripts/index.js"></script>
-  <script src="./scripts/utils.js"></script>
 </body>
 </html>
 

@@ -30,10 +30,7 @@ export class FormValidator {
 
   // Função para atualizar o estado do botão
   updateButtonState(inputs, submitButton) {
-    // Verifica se todos os inputs são válidos
     const isFormValid = Array.from(inputs).every(input => input.validity.valid);
-
-    // Habilita ou desabilita o botão de envio com base na validade
     if (isFormValid) {
       submitButton.classList.remove('form__button_disabled');
       submitButton.disabled = false;
@@ -52,8 +49,8 @@ export class FormValidator {
       // Adiciona eventos de input para validação e atualização do estado do botão
       inputs.forEach((input) => {
         input.addEventListener('input', () => {
-          this.isValid(input);  // Valida o campo específico
-          this.updateButtonState(inputs, submitButton);  // Atualiza o estado do botão
+          this.isValid(input);
+          this.updateButtonState(inputs, submitButton);
         });
       });
 
@@ -61,8 +58,8 @@ export class FormValidator {
       this.updateButtonState(inputs, submitButton);
 
       form.addEventListener('submit', (event) => {
-        event.preventDefault(); // Impede o envio padrão
-        inputs.forEach(input => this.isValid(input)); // Valida todos os campos antes de enviar
+        event.preventDefault();
+        inputs.forEach(input => this.isValid(input));
       });
     });
   }

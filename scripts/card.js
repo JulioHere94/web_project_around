@@ -1,8 +1,12 @@
-// card.js
+import { PopupWithImage } from '../scripts/PopupWithImage.js'; // Importando PopupWithImage
+
 export class Card {
-  constructor(name, link) {
+  constructor(name, link, templateSelector) {
     this.name = name;
     this.link = link;
+    this.templateSelector = templateSelector;
+    this._popupWithImage = new PopupWithImage('.popup__element');
+    this._popupWithImage.setEventListeners();
   }
 
   // Criando o elemento do cartão
@@ -40,7 +44,7 @@ export class Card {
     containerLike.addEventListener('click', () => this.#toggleLike(containerLikeImage));
 
     // Popup
-    containerImage.addEventListener('click', () => this.#openPopup(containerImage));
+    containerImage.addEventListener('click', () => this._popupWithImage.open(this.name, this.link));
 
     container.append(containerParagraph, containerImage, containerLike, containerTrash);
 
@@ -58,29 +62,6 @@ export class Card {
       likeImage.src = './images/likeAtive.png';
     } else {
       likeImage.src = './images/Vector.svg';
-    }
-  }
-
-  // Método privado para abrir o popup
-  #openPopup(image) {
-    const imagePopup = document.querySelector('.popup__element');
-    const popupImage = document.querySelector('.popup__element_img');
-    const popupTitle = document.querySelector('.popup__element_title');
-
-    popupImage.src = this.link;
-    popupImage.alt = this.name;
-    popupTitle.textContent = this.name;
-    imagePopup.showModal();
-
-    const closePopupButton = document.querySelector('.closePopup');
-    closePopupButton.addEventListener("click", () => imagePopup.close());
-    imagePopup.addEventListener('click', (event) => this.#closePopup(event, imagePopup));
-  }
-
-  // Método privado para fechar o popup ao clicar fora
-  #closePopup(event, popup) {
-    if (!event.target.closest('.popup_element-rectangle')) {
-      popup.close();
     }
   }
 
