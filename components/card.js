@@ -1,6 +1,5 @@
-// card.js
 import { PopupWithImage } from './PopupWithImage.js';
-import { PopupWithConfirmation } from './PopupWithConfirmation.js'; // Importando PopupWithConfirmation
+
 
 export class Card {
   constructor(name, link, isLiked, id, templateSelector, { handleCardClick, handleLikeClick, handleDeleteClick }) {
@@ -35,7 +34,7 @@ export class Card {
     containerTrash.classList.add('element__button-trash');
     const containerTrashImage = document.createElement('img');
     containerTrashImage.classList.add('element_button-image-trash');
-    containerTrashImage.src = './images/Trash.png';
+    containerTrashImage.src = '../images/Trash.png';
 
     containerTrash.append(containerTrashImage);
     // Evento de clique para abrir o popup de exclusão
@@ -76,7 +75,6 @@ export class Card {
     // Chama a função de API para registrar a mudança no servidor
     this.handleLikeClick({ id: this.id, isLiked: this.isLiked })
       .then(() => {
-        // Nada a fazer aqui, já atualizamos o estado local antes da chamada
       })
       .catch(err => {
         console.error('Erro ao atualizar o estado de like no servidor:', err);
