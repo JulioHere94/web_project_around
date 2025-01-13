@@ -34,7 +34,7 @@ export class Card {
     containerTrash.classList.add('element__button-trash');
     const containerTrashImage = document.createElement('img');
     containerTrashImage.classList.add('element_button-image-trash');
-    containerTrashImage.src = '../images/Trash.png';
+    containerTrashImage.src = './images/Trash.png';
 
     containerTrash.append(containerTrashImage);
     // Evento de clique para abrir o popup de exclusão
