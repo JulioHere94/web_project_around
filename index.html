@@ -17,10 +17,36 @@
     </header>
     <main class="main">
       <section class="profile">
-        <img src="./images/Avatar.jpg" alt="imagem de perfil" class="Profile__image">
+        <div class="profile-container">
+        <img src="" alt="imagem de perfil" class="Profile__image">
+        <img class="profile-icon" src="./images/pen.png"></img>
+        <dialog class="popup popup__image-perfil1" id="popup__image-perfil">
+          <div class="popup_rectangle">
+            <button class="popup__button-cancel">
+              <img src="./images/Close Icon.png" class="popup__button-cancel-image">
+            </button>
+            <form class="popup__container form form__change" novalidate>
+              <h1 class="container__title title__change">Alterar a foto do perfil</h1>
+              <label for="input__image" class="form__field">
+                <input
+                id="input__image1"
+                class="container__imput input__link form__input input__a"
+                placeholder="Link da imagem"
+                type="url"
+                minlength="2"
+                maxlength="200"
+                required
+                name="input__image1">
+                <span id="input__link-error1" class="form__input-error"></span>
+              </label>
+              <button type="submit" class="container__button button__change">Salvar</button>
+            </form>
+          </div>
+        </dialog>
+      </div>
         <ul class="profile-Info">
-          <li class="profile-Info_name name-result">Jacques Cousteau</li>
-          <li class="profile-Info_sub-title sub-title">explorador</li>
+          <li class="profile-Info_name name-result">Nome</li>
+          <li class="profile-Info_sub-title sub-title">Sobre</li>
           <button class="profile-Info__button" id="edit">
             <img src="./images/button-edit.png" alt="botão editar" class="profile-Info__button-image">
           </button>
@@ -91,7 +117,7 @@
                   minlength="2"
                   maxlength="200"
                   required
-                  name="input__link">
+                  name="input__link2">
                 <span id="input__link-error" class="form__input-error"></span>
               </label>
               <button type="submit" class="container__button button__add">Criar</button>
@@ -112,6 +138,17 @@
       </section>
       <section class="elements__container">
       </section>
+      <dialog class="popup popup-delete" id="popup-delete">
+        <div class="popup_rectangle">
+          <button class="popup__button-cancel">
+            <img src="./images/Close Icon.png" class="popup__button-cancel-image">
+          </button>
+          <form class="popup__container form form__delete" novalidate>
+            <h1 class="container__title title__delete">Tem certeza?</h1>
+            <button type="submit" class="container__button button__delete">Sim</button>
+          </form>
+        </div>
+      </dialog>
       <footer class="footer">
         <p class="footer__text">&copy; 2024 Around The U.S.</p>
       </footer>

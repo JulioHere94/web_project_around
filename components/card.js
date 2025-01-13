@@ -1,18 +1,26 @@
-import { PopupWithImage } from './PopupWithImage.js'; // Importando PopupWithImage
+// card.js
+import { PopupWithImage } from './PopupWithImage.js';
+import { PopupWithConfirmation } from './PopupWithConfirmation.js'; // Importando PopupWithConfirmation
 
 export class Card {
-  constructor(name, link, templateSelector) {
+  constructor(name, link, isLiked, id, templateSelector, { handleCardClick, handleLikeClick, handleDeleteClick }) {
     this.name = name;
     this.link = link;
+    this.isLiked = isLiked;
+    this.id = id;
     this.templateSelector = templateSelector;
     this._popupWithImage = new PopupWithImage('.popup__element');
     this._popupWithImage.setEventListeners();
+    this.handleCardClick = handleCardClick;
+    this.handleLikeClick = handleLikeClick;
+    this.handleDeleteClick = handleDeleteClick; // Associa a função de exclusão
   }
 
   // Criando o elemento do cartão
   #createElement() {
     const container = document.createElement('div');
     container.classList.add('element');
+    container.setAttribute('data-id', this.id); // Atribuindo ID ao container
 
     const containerParagraph = document.createElement('p');
     containerParagraph.classList.add('element_paragraph');
@@ -30,46 +38,67 @@ export class Card {
     containerTrashImage.src = './images/Trash.png';
 
     containerTrash.append(containerTrashImage);
-    // Adicionando evento de clique para o trash
+    // Evento de clique para abrir o popup de exclusão
     containerTrash.addEventListener('click', () => this.#handleTrash(container));
 
     const containerLike = document.createElement('button');
     containerLike.classList.add('element__button');
     const containerLikeImage = document.createElement('img');
     containerLikeImage.classList.add('element_button-image');
-    containerLikeImage.src = './images/Vector.svg';
+    containerLikeImage.src = this.isLiked ? './images/likeAtive.png' : './images/Vector.svg';
 
     containerLike.append(containerLikeImage);
-    // Adicionando evento de clique para o like
+    // Evento de clique para o like
     containerLike.addEventListener('click', () => this.#toggleLike(containerLikeImage));
 
-    // Popup
-    containerImage.addEventListener('click', () => this._popupWithImage.open(this.name, this.link));
+    // Evento de clique para abrir a imagem no popup
+    containerImage.addEventListener('click', () => this.handleCardClick(this.name, this.link));
 
     container.append(containerParagraph, containerImage, containerLike, containerTrash);
 
     return container;
   }
 
-  // Método privado para lidar com o evento do trash
   #handleTrash(container) {
-    container.remove();  // Remove o cartão
+    this.handleDeleteClick(this.id); // Passa o ID do card para a função de exclusão
   }
 
-  // Método privado para alternar a imagem de like
   #toggleLike(likeImage) {
-    if (likeImage.src.includes('Vector.svg')) {
-      likeImage.src = './images/likeAtive.png';
-    } else {
-      likeImage.src = './images/Vector.svg';
-    }
+    if (this._isProcessing) return; // Evita cliques consecutivos
+    this._isProcessing = true;
+
+    const previousState = this.isLiked;
+    this.isLiked = !this.isLiked;
+
+    // Atualiza a imagem do botão de like
+    likeImage.src = this.isLiked ? './images/likeAtive.png' : './images/Vector.svg';
+
+    // Chama a função de API para registrar a mudança no servidor
+    this.handleLikeClick({ id: this.id, isLiked: this.isLiked })
+      .then(() => {
+        // Nada a fazer aqui, já atualizamos o estado local antes da chamada
+      })
+      .catch(err => {
+        console.error('Erro ao atualizar o estado de like no servidor:', err);
+        // Reverte o estado local em caso de erro
+        this.isLiked = previousState;
+        likeImage.src = this.isLiked ? './images/likeAtive.png' : './images/Vector.svg';
+      })
+      .finally(() => {
+        this._isProcessing = false; // Libera o botão após a finalização
+      });
   }
 
-  // Método público para retornar o elemento do cartão
   getCardElement() {
     return this.#createElement();
   }
 }
+
+
+
+
+
+
 
 
 

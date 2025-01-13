@@ -7,6 +7,9 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
+  object-fit: cover;
+  transition: background-image 0.3s ease;
+  display: block;
 }
 
 .profile-Info{
@@ -108,3 +111,27 @@
     width: 282px;
   }
 }
+        .profile-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-icon {
+          width: 26px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 24px; /* ajuste conforme necessário */
+            opacity: 0;
+            transition: 0.3s ease;
+        }
+        .profile-container:hover .Profile__image {
+            filter: brightness(50%);
+        }
+        .profile-container:hover .profile-icon {
+            opacity: 1;
+        }
+
+

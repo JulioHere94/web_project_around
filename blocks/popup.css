@@ -231,3 +231,67 @@ border-bottom: solid 1px #000;
   }
 
 
+  .popup-delete{
+    z-index: 20;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 470px;
+    height: 230px;
+    padding-top: 0px;
+  }
+
+  .form__delete{
+    padding-top: 0px;
+    border-radius: 10px;
+  }
+
+  .button__delete{
+    margin-top: 38px;
+    width: 358px;
+    height: 50px;
+    background-color: #000000;
+    color: white;
+    cursor: pointer;
+  }
+
+  .title__delete{
+    margin-top: 34px;
+  }
+
+  .popup-delete::backdrop{
+    background-color: rgba(0,0,0,0.6);
+  }
+
+
+  .popup__image-perfil1{
+    z-index: 20;
+    position: fixed;
+    top: 25%;
+    left: 0%;
+    width: 470px;
+    padding-top: 0px;
+  }
+
+  .form__change{
+    padding-top: 0px;
+    border-radius: 10px;
+  }
+
+  .button__change{
+    margin-top: 48px;
+    width: 358px;
+    height: 50px;
+    background-color: #000000;
+    color: white;
+    cursor: pointer;
+  }
+
+  .title__change{
+    margin-top: 34px;
+    margin-bottom: 54px;
+  }
+
+  .popup-change::backdrop{
+    background-color: rgba(0,0,0,0.6);
+  }
