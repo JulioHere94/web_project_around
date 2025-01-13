@@ -23,7 +23,7 @@
         <dialog class="popup popup__image-perfil1" id="popup__image-perfil">
           <div class="popup_rectangle">
             <button class="popup__button-cancel">
-              <img src="./images/Close Icon.png" class="popup__button-cancel-image">
+              <img src="./images/Close Icon.png" class="popup__button-cancel-image" id="close-dialog">
             </button>
             <form class="popup__container form form__change" novalidate>
               <h1 class="container__title title__change">Alterar a foto do perfil</h1>
@@ -37,7 +37,7 @@
                 maxlength="200"
                 required
                 name="input__image1">
-                <span id="input__link-error1" class="form__input-error"></span>
+                <span id="input__image1-error" class="form__input-error"></span>
               </label>
               <button type="submit" class="container__button button__change">Salvar</button>
             </form>

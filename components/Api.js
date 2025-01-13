@@ -26,7 +26,6 @@ export class Api {
     .catch(err => console.error(`Erro ao obter informações do usuário: ${err}`));
   }
 
-  // Atualização aqui para incluir o campo avatar
   updateUserInfo({ name, job, avatar }) {
     const data = {};
     if (name) data.name = name;
@@ -50,6 +49,24 @@ export class Api {
       });
   }
 
+  updateUserAvatar(avatar) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({ avatar })
+    })
+      .then(res => {
+        if (!res.ok) {
+          return res.json().then(err => Promise.reject(err.message));
+        }
+        return res.json();
+      })
+      .catch(err => {
+        console.error(`Erro ao atualizar avatar: ${err}`);
+        throw err;
+      });
+  }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers
@@ -62,10 +79,7 @@ export class Api {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify({
-        name: name,
-        link: link
-      })
+      body: JSON.stringify({ name, link })
     })
     .then(res => res.json())
     .catch(err => console.error(`Erro ao adicionar card: ${err}`));
@@ -82,27 +96,28 @@ export class Api {
     })
     .catch(err => {
       console.error(`Erro ao deletar card: ${err}`);
-      throw err; // Propaga o erro para ser tratado no nível superior
+      throw err;
     });
   }
 
   toggleLike(cardId, isLiked) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: isLiked ? "PUT" : "DELETE",
-      headers: this._headers,
+      headers: this._headers
     })
-    .then((res) => {
+    .then(res => {
       if (!res.ok) {
         throw new Error("Erro ao atualizar o estado de like");
       }
       return res.json();
     })
-    .catch((err) => {
+    .catch(err => {
       console.error(`Erro ao atualizar like: ${err}`);
       throw err;
     });
   }
 }
+
 
 
 
